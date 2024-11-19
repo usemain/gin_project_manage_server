@@ -5,7 +5,6 @@ import (
 	"gin_project_manage_server/model"
 	"gin_project_manage_server/shares/global"
 	"github.com/go-redis/redis/v8"
-	_ "github.com/go-redis/redis/v8"
 	"gopkg.in/yaml.v3"
 	"os"
 )

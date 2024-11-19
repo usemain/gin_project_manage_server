@@ -22,7 +22,7 @@ func MakeAuthorization(Uid, email string) (tokenString string, err error) {
 			IssuedAt:  jwt.NewNumericDate(time.Now()),                                         // 签发时间
 			NotBefore: jwt.NewNumericDate(time.Now()),                                         // 生效时间
 		}}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim) // 使用HS256算法
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
 	tokenString, err = token.SignedString([]byte(config.SECRET))
 	return tokenString, err
 }
@@ -39,18 +39,18 @@ func ParseAuthorization(tokenString string) (*MyClaims, error) {
 		var ve *jwt.ValidationError
 		if errors.As(err, &ve) {
 			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
-				return nil, errors.New("that's not even a token")
+				return nil, errors.New("未知令牌")
 			} else if ve.Errors&jwt.ValidationErrorExpired != 0 {
-				return nil, errors.New("token is expired")
+				return nil, errors.New("令牌已过期")
 			} else if ve.Errors&jwt.ValidationErrorNotValidYet != 0 {
-				return nil, errors.New("token not active yet")
+				return nil, errors.New("令牌尚未激活")
 			} else {
-				return nil, errors.New("couldn't handle this token")
+				return nil, errors.New("无法处理此令牌")
 			}
 		}
 	}
 	if claims, ok := token.Claims.(*MyClaims); ok && token.Valid {
 		return claims, nil
 	}
-	return nil, errors.New("couldn't handle this token")
+	return nil, errors.New("无法处理此令牌")
 }
