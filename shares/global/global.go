@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	GVA_DB    *gorm.DB
-	GVA_REDIS *redis.Client
-	GVA_CTX   = context.Background()
+	GvaDB    *gorm.DB
+	GvaRedis *redis.Client
+	GvaCtx   = context.Background()
 )

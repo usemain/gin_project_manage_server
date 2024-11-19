@@ -2,7 +2,7 @@ package main
 
 import (
 	"gin_project_manage_server/cmd"
-	"gin_project_manage_server/internal/dao"
+	"gin_project_manage_server/shares/dao"
 )
 
 func init() {

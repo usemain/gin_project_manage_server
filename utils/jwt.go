@@ -2,7 +2,7 @@ package utils
 
 import (
 	"errors"
-	"gin_project_manage_server/internal/config"
+	"gin_project_manage_server/shares/config"
 	"github.com/golang-jwt/jwt/v4"
 	"time"
 )
